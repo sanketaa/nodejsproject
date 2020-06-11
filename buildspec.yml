@@ -8,20 +8,16 @@ phases:
   install:
     commands:
       - echo "Installing Ubuntu Packages"
-      - apt-get update
-      - apt-get install -y curl gcc make python-pip zip
-      - echo "Installing Python modules"
-      - pip install -U pip
-      - pip install boto3
   build:
     commands:
       - echo "Creating zip"
-      - mkdir build-output
-      - zip -r build-output.zip build-output
+      - zip -r function.zip index.json
+      - zip -r function.zip package.json
+      - ls -al
   post_build:
     commands:
-      - echo "build completed on `date`"
-      - aws s3 cp build-output.zip $S3_BUCKET
+      - echo "creating lambda"
+      - aws lambda create-function --function-name my-function \ --zip-file fileb://function.zip --handler index.handler --runtime nodejs12.x \--role arn:aws:iam::123456789012:role/lambda-ex
 artifacts:
   files:
     - build-output.zip
