@@ -1,0 +1,28 @@
+version: 0.2
+
+env:
+  variables:
+    S3_BUCKET: nba-devbucketfor
+
+phases:
+  install:
+    commands:
+      - echo "Installing Ubuntu Packages"
+      - apt-get update
+      - apt-get install -y curl gcc make python-pip zip
+      - echo "Installing Python modules"
+      - pip install -U pip
+      - pip install boto3
+  build:
+    commands:
+      - echo "Creating zip"
+      - mkdir build-output
+      - zip -r build-output.zip build-output
+  post_build:
+    commands:
+      - echo "build completed on `date`"
+      - aws s3 cp build-output.zip $S3_BUCKET
+artifacts:
+  files:
+    - build-output.zip
+  discard-paths: no
