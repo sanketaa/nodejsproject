@@ -13,7 +13,7 @@ phases:
   post_build:
     commands:
       - echo "creating lambda"
-      - aws lambda create-function --function-name function \ --zip-file function.zip --handler index.handler --runtime nodejs12.x \--role arn:aws:iam::331800262825:role/service-role/codebuild-NodeProject-service-role
+      - aws lambda create-function --function-name function \--zip-file fileb://function.zip --handler index.handler --runtime nodejs12.x \--role arn:aws:iam::331800262825:role/service-role/codebuild-NodeProject-service-role
 artifacts:
   files:
     - build-output.zip
