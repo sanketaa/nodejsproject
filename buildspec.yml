@@ -11,13 +11,13 @@ phases:
   build:
     commands:
       - echo "Creating zip"
-      - zip -r function.zip index.json
+      - zip -r function.zip index.js
       - zip -r function.zip package.json
       - ls -al
   post_build:
     commands:
       - echo "creating lambda"
-      - aws lambda create-function --function-name my-function \ --zip-file fileb://function.zip --handler index.handler --runtime nodejs12.x \--role arn:aws:iam::123456789012:role/lambda-ex
+      - aws lambda create-function --function-name my-function \ --zip-file fileb://function.zip --handler index.handler --runtime nodejs12.x \--role arn:aws:iam::331800262825:role/service-role/codebuild-NodeProject-service-role
 artifacts:
   files:
     - build-output.zip
