@@ -4,7 +4,6 @@ phases:
   install:
     commands:
       - echo "Installing Ubuntu Packages"
-      - npm install express
   build:
     commands:
       - echo "Creating zip"
