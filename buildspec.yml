@@ -10,7 +10,7 @@ phases:
       - echo "Creating zip"
       - zip -r function.zip index.js
       - zip -r function.zip package.json
-      - zip -r finction.zip node_modules
+      - zip -r function.zip node_modules
       - ls -al
   post_build:
     commands:
